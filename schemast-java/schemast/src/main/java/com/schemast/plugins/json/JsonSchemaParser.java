@@ -6,10 +6,14 @@ import com.schemast.schemas.Schema;
 import com.schemast.schemas.fields.*;
 import com.schemast.schemas.SchemaParseException;
 import com.schemast.schemas.SchemaParser;
-
+import com.schemast.SchemastParser;
 import java.io.IOException;
 
-public class JsonSchemaParser implements SchemaParser {
+@SchemastParser(
+    type = "json",
+    version = 1
+)
+public class JsonSchemaParser extends SchemaParser {
     private JsonFieldParser fp = new JsonFieldParser();
     private ObjectMapper m = new ObjectMapper();
 

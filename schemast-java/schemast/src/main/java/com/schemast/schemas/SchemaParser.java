@@ -1,10 +1,17 @@
 package com.schemast.schemas;
 
-public interface SchemaParser {
-    String HEADER = "header";
-    String SCHEMA_NAME = "schemaName";
-    String VERSION = "version";
-    String FIELDS = "fields";
+import com.schemast.SchemastParser;
 
-    Schema parse(String schema);
+public abstract class SchemaParser {
+    public static final String HEADER = "header";
+    public static final String SCHEMA_NAME = "schemaName";
+    public static final String VERSION = "version";
+    public static final String FIELDS = "fields";
+
+    public abstract Schema parse(String schema);
+
+    public String getType() {
+        SchemastParser anno = getClass().getAnnotation(SchemastParser.class);
+        return anno.type();
+    }
 }

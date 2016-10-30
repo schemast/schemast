@@ -1,6 +1,5 @@
 package com.schemast.schemas;
 
-import com.schemast.SchemastParser;
 import org.reflections.Reflections;
 
 import java.util.HashMap;

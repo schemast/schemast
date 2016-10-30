@@ -1,7 +1,5 @@
 package com.schemast.schemas;
 
-import com.schemast.SchemastParser;
-
 public abstract class SchemaParser {
     public static final String HEADER = "header";
     public static final String SCHEMA_NAME = "schemaName";

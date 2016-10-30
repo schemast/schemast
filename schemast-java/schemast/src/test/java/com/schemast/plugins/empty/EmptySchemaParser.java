@@ -1,9 +1,8 @@
 package com.schemast.plugins.empty;
 
-import com.schemast.SchemastParser;
+import com.schemast.schemas.SchemastParser;
 import com.schemast.schemas.Schema;
 import com.schemast.schemas.SchemaParser;
-import com.schemast.schemas.fields.StringField;
 
 @SchemastParser(
     type = "empty",

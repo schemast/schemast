@@ -1,6 +1,6 @@
 package com.schemast.plugins.nulling;
 
-import com.schemast.SchemastParser;
+import com.schemast.schemas.SchemastParser;
 import com.schemast.schemas.Schema;
 import com.schemast.schemas.SchemaParser;
 

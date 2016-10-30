@@ -1,4 +1,4 @@
-package com.schemast;
+package com.schemast.schemas;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

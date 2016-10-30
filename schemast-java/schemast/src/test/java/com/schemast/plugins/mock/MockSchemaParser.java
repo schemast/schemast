@@ -1,6 +1,6 @@
 package com.schemast.plugins.mock;
 
-import com.schemast.SchemastParser;
+import com.schemast.schemas.SchemastParser;
 import com.schemast.schemas.Schema;
 import com.schemast.schemas.SchemaParser;
 import com.schemast.schemas.fields.StringField;

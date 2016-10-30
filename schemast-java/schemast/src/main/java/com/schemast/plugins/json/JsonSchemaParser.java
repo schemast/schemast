@@ -6,7 +6,7 @@ import com.schemast.schemas.Schema;
 import com.schemast.schemas.fields.*;
 import com.schemast.schemas.SchemaParseException;
 import com.schemast.schemas.SchemaParser;
-import com.schemast.SchemastParser;
+import com.schemast.schemas.SchemastParser;
 import java.io.IOException;
 
 @SchemastParser(

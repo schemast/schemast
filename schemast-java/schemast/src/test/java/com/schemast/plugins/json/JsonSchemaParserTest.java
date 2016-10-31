@@ -1,6 +1,6 @@
 package com.schemast.plugins.json;
 
-import com.schemast.plugins.SchemaParserBaseTest;
+import com.schemast.schemas.SchemaParserBaseTest;
 import com.schemast.schemas.*;
 import org.junit.Test;
 

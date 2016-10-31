@@ -1,6 +1,5 @@
-package com.schemast.plugins;
+package com.schemast.schemas;
 
-import com.schemast.schemas.Schema;
 import com.schemast.schemas.fields.Field;
 import org.junit.Before;
 import org.junit.Test;

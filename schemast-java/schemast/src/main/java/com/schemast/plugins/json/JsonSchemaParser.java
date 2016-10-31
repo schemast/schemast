@@ -1,5 +1,6 @@
 package com.schemast.plugins.json;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.schemast.schemas.Schema;
@@ -17,15 +18,26 @@ public class JsonSchemaParser extends SchemaParser {
     private JsonFieldParser fp = new JsonFieldParser();
     private ObjectMapper m = new ObjectMapper();
 
+    public JsonSchemaParser() {
+        m.configure(DeserializationFeature.FAIL_ON_READING_DUP_TREE_KEY, true);
+    }
+
     public Schema parse(String schema) {
         try {
+            validateJson(schema);
+
             JsonNode root = m.readTree(schema);
             Schema s = parseHeader(root.get(HEADER));
+
             parseFields(root.get(FIELDS), s);
             return s;
         } catch (IOException e) {
             throw new SchemaParseException(e);
         }
+    }
+
+    private void validateJson(String schema) throws IOException {
+        m.readTree(schema);
     }
 
     private Schema parseHeader(JsonNode header) throws IOException {

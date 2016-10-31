@@ -1,6 +1,6 @@
 package com.schemast.schemas.fields;
 
-public class BooleanField extends Field {
+public class BooleanField extends Field implements Defaulted<Boolean> {
     private Boolean defaultValue = null;
 
     public BooleanField(String name) {
@@ -12,9 +12,15 @@ public class BooleanField extends Field {
         return Field.BOOLEAN;
     }
 
-    public BooleanField withDefault(boolean val) {
+    @Override
+    public BooleanField withDefault(Boolean val) {
         this.defaultValue = val;
         return this;
+    }
+
+    @Override
+    public Boolean getDefault() {
+        return defaultValue;
     }
 
 }

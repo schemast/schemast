@@ -1,6 +1,6 @@
 package com.schemast.schemas.fields;
 
-public class FloatField extends Field {
+public class FloatField extends Field implements Defaulted<Float> {
     private Float defaultValue = null;
 
     public FloatField(String name) {
@@ -11,9 +11,14 @@ public class FloatField extends Field {
         return Field.FLOAT;
     }
 
-    public FloatField withDefault(float val) {
+    @Override
+    public FloatField withDefault(Float val) {
         this.defaultValue = val;
         return this;
     }
 
+    @Override
+    public Float getDefault() {
+        return defaultValue;
+    }
 }

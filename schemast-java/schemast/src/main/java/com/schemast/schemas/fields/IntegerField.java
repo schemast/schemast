@@ -1,6 +1,6 @@
 package com.schemast.schemas.fields;
 
-public class IntegerField extends Field {
+public class IntegerField extends Field implements Defaulted<Integer> {
     private Integer defaultValue = null;
 
     public IntegerField(String name) {
@@ -11,9 +11,15 @@ public class IntegerField extends Field {
         return Field.INTEGER;
     }
 
-    public IntegerField withDefault(int val) {
+    @Override
+    public IntegerField withDefault(Integer val) {
         this.defaultValue = val;
         return this;
+    }
+
+    @Override
+    public Integer getDefault() {
+        return defaultValue;
     }
 
 }

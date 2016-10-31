@@ -2,7 +2,7 @@ package com.schemast.schemas.fields;
 
 import java.math.BigInteger;
 
-public class BigIntegerField extends Field {
+public class BigIntegerField extends Field implements Defaulted<BigInteger> {
     private BigInteger defaultValue = null;
 
     public BigIntegerField(String name) {
@@ -13,9 +13,15 @@ public class BigIntegerField extends Field {
         return Field.BIG_INTEGER;
     }
 
+    @Override
     public BigIntegerField withDefault(BigInteger val) {
         this.defaultValue = val;
         return this;
+    }
+
+    @Override
+    public BigInteger getDefault() {
+        return defaultValue;
     }
 
 }

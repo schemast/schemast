@@ -35,14 +35,11 @@ public class JsonFieldParser {
     private void checkIndex(Field field, JsonNode n) {
         String index = JsonUtils.extractOptionalString(n, Field.INDEX);
         if (index != null) {
-            if (index.equals(Field.Index.AS_IS.toString())) {
-                field.indexed();
-            } else if (index.equals(Field.Index.FULL.toString())) {
-                field.tokenized();
-            } else if (index.equals(Field.Index.NO.toString())) {
-                field.notIndexed();
-            } else {
-                throw new InvalidFieldException("Unknown " + Field.INDEX + " setting: " + index);
+            switch (Field.Index.valueOf(index)) {
+                case AS_IS: field.indexed(); break;
+                case FULL: field.tokenized(); break;
+                case NO: field.notIndexed(); break;
+                default: throw new InvalidFieldException("Unknown " + Field.INDEX + " setting: " + index);
             }
         }
     }
@@ -50,12 +47,10 @@ public class JsonFieldParser {
     private void checkStore(Field field, JsonNode n) {
         String store = JsonUtils.extractOptionalString(n, Field.STORE);
         if (store != null) {
-            if (store.equals(Field.Store.NO.toString())) {
-                field.notStored();
-            } else if (store.equals(Field.Store.YES.toString())) {
-                field.stored();
-            } else {
-                throw new InvalidFieldException("Unknown " + Field.STORE + " setting: " + store);
+            switch (Field.Store.valueOf(store)) {
+                case YES: field.stored(); break;
+                case NO: field.notStored(); break;
+                default: throw new InvalidFieldException("Unknown " + Field.STORE + " setting: " + store);
             }
         }
     }

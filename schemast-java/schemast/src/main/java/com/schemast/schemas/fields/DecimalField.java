@@ -1,6 +1,6 @@
 package com.schemast.schemas.fields;
 
-public class DecimalField extends Field {
+public class DecimalField extends Field implements Defaulted<Double> {
     private Double defaultValue = null;
 
     public DecimalField(String name) {
@@ -11,9 +11,15 @@ public class DecimalField extends Field {
         return Field.DECIMAL;
     }
 
-    public DecimalField withDefault(double val) {
+    @Override
+    public DecimalField withDefault(Double val) {
         this.defaultValue = val;
         return this;
+    }
+
+    @Override
+    public Double getDefault() {
+        return defaultValue;
     }
 
 }

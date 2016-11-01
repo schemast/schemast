@@ -1,6 +1,7 @@
 package com.schemast;
 
 import com.schemast.schemas.SchemaParserRegistry;
+import com.schemast.schemas.UnknownSchemaTypeException;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,6 +1,7 @@
 package com.schemast.repository;
 
 import com.schemast.schemas.Schema;
+import com.schemast.schemas.fields.StringField;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,9 +17,9 @@ public class InMemorySchemaRepoTest {
     private int SECOND_VERSION = 2;
     private int BAD_VERSION = 666;
 
-    private Schema first = new Schema(SCHEMA, VERSION);
-    private Schema secondV1 = new Schema(SECOND_SCHEMA, FIRST_VERSION);
-    private Schema secondV2 = new Schema(SECOND_SCHEMA, SECOND_VERSION);
+    private Schema first = new Schema.Builder().name(SCHEMA).version(VERSION).field(new StringField("blah")).build();
+    private Schema secondV1 = new Schema.Builder().name(SECOND_SCHEMA).version(FIRST_VERSION).field(new StringField("blah")).build();
+    private Schema secondV2 = new Schema.Builder().name(SECOND_SCHEMA).version(SECOND_VERSION).field(new StringField("blah")).build();
 
     private SchemaRepo repo;
 

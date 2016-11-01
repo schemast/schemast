@@ -20,6 +20,7 @@ public class JsonTestData extends TestData {
     public String buildShell(List<Field> fields) {
         ObjectNode root = m.createObjectNode();
         ObjectNode header = root.putObject(SchemaParser.HEADER);
+        header.put(SchemaParser.NAMESPACE, SchemaParserBaseTest.NAMESPACE);
         header.put(SchemaParser.SCHEMA_NAME, SchemaParserBaseTest.SCHEMA_NAME);
         header.put(SchemaParser.VERSION, SchemaParserBaseTest.VERSION);
         ArrayNode fieldsNode = root.putArray(SchemaParser.FIELDS);

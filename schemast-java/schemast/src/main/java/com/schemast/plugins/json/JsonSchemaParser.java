@@ -25,12 +25,9 @@ public class JsonSchemaParser extends SchemaParser {
     public Schema parse(String schema) {
         try {
             validateJson(schema);
-
             JsonNode root = m.readTree(schema);
-            Schema s = parseHeader(root.get(HEADER));
-
-            parseFields(root.get(FIELDS), s);
-            return s;
+            Schema.Builder b = parseHeader(root.get(HEADER));
+            return parseFields(b, root.get(FIELDS));
         } catch (IOException e) {
             throw new SchemaParseException(e);
         }
@@ -40,22 +37,24 @@ public class JsonSchemaParser extends SchemaParser {
         m.readTree(schema);
     }
 
-    private Schema parseHeader(JsonNode header) throws IOException {
-        if (header == null) throw new SchemaParseException(HEADER + " field is required");
-
-        String name = JsonUtils.extractRequiredString(header, SCHEMA_NAME);
-        int version = JsonUtils.extractRequiredInt(header, VERSION);
-        return new Schema(name, version);
+    private Schema.Builder parseHeader(JsonNode header) throws IOException {
+        Schema.Builder b = new Schema.Builder();
+        b.namespace(JsonUtils.extractRequiredString(header, NAMESPACE));
+        b.name(JsonUtils.extractRequiredString(header, SCHEMA_NAME));
+        b.version(JsonUtils.extractRequiredInt(header, VERSION));
+        return b;
     }
 
-    private void parseFields(JsonNode fields, Schema s) {
-        if (fields == null) throw new SchemaParseException(FIELDS + " field is required");
-        if (!fields.isArray()) throw new SchemaParseException(FIELDS + " element is an array");
+    private Schema parseFields(Schema.Builder b, JsonNode fields) {
+        if (fields == null) throw new SchemaParseException(FIELDS + " element is required");
+        if (!fields.isArray()) throw new SchemaParseException(FIELDS + " element must be an array");
 
         fields.iterator().forEachRemaining(f -> {
             Field field = fp.parse(f);
-            s.addField(field);
+            b.field(field);
         });
+
+        return b.build();
     }
 
 }

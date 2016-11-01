@@ -12,9 +12,7 @@ import com.schemast.schemas.fields.StringField;
 public class MockSchemaParser extends SchemaParser {
 
     public Schema parse(String schema) {
-        Schema s = new Schema("mock", 12);
-        s.addField(new StringField("hello"));
-        return s;
+        return new Schema.Builder().name("mock").version(12).field(new StringField("hello")).build();
     }
 
 }

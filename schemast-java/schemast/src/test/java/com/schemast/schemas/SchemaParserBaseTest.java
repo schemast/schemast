@@ -18,6 +18,7 @@ public abstract class SchemaParserBaseTest {
     public static final String INTEGER_FIELD_NAME = "myInt";
     public static final String LONG_FIELD_NAME = "myLong";
     public static final String STRING_FIELD_NAME = "myStr";
+    public static final String NAMESPACE = "myNamespace";
 
     protected Schema s;
 

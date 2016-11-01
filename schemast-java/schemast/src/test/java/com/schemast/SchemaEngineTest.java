@@ -1,22 +1,23 @@
-package com.schemast.schemas;
+package com.schemast;
 
+import com.schemast.schemas.SchemaParserRegistry;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class SchemaBuilderTest {
+public class SchemaEngineTest {
     private String UNKNOWN_PARSER = "huh?";
     private String MOCK_PARSER = "mock";
     private String EMPTY_PARSER = "empty";
     private String NULL_PARSER = "nulling";
 
-    private SchemaBuilder sb;
+    private SchemaEngine engine;
 
     @Before
     public void doBefore() {
-        sb = new SchemaBuilder();
+        engine = new SchemaEngine(null);
     }
 
     @Test(expected = UnknownSchemaTypeException.class)
@@ -24,23 +25,15 @@ public class SchemaBuilderTest {
         SchemaParserRegistry reg = new SchemaParserRegistry();
         assertNull(reg.getParser(UNKNOWN_PARSER));
 
-        sb.parse(UNKNOWN_PARSER, "unknown data");
+        engine.parse(UNKNOWN_PARSER, "unknown data");
     }
 
-    @Test(expected = InvalidSchemaException.class)
-    public void testSchemaWithNoFields() {
-        SchemaParserRegistry reg = new SchemaParserRegistry();
-        assertNotNull(reg.getParser(EMPTY_PARSER));
-
-        sb.parse(EMPTY_PARSER, "empty data");
-    }
-
-    @Test(expected = InvalidSchemaException.class)
+    @Test
     public void testSchemaParserReturnsNullSchema() {
         SchemaParserRegistry reg = new SchemaParserRegistry();
         assertNotNull(reg.getParser(NULL_PARSER));
 
-        sb.parse(NULL_PARSER, "huh?");
+        engine.parse(NULL_PARSER, "huh?");
     }
 
     @Test
@@ -48,7 +41,7 @@ public class SchemaBuilderTest {
         SchemaParserRegistry reg = new SchemaParserRegistry();
         assertNotNull(reg.getParser(MOCK_PARSER));
 
-        assertNotNull(sb.parse(MOCK_PARSER, "huh?"));
+        assertNotNull(engine.parse(MOCK_PARSER, "huh?"));
     }
 
 }

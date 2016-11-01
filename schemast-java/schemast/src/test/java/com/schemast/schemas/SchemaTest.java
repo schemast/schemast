@@ -71,7 +71,7 @@ public class SchemaTest {
         b.field(null).build();
     }
 
-    @Test(expected = DuplicateFieldException.class)
+    @Test(expected = InvalidSchemaException.class)
     public void testAddFieldFailsWhenFieldIsAlreadyPresent() {
         b.field(new StringField(FIELD)).build();
     }

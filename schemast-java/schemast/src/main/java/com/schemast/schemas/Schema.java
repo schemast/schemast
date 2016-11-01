@@ -1,7 +1,6 @@
 package com.schemast.schemas;
 
 import com.schemast.schemas.fields.Field;
-import com.schemast.schemas.fields.InvalidFieldException;
 
 import java.util.*;
 
@@ -38,7 +37,7 @@ public class Schema {
             if (field == null) {
                 throw new NullPointerException("Cannot add a null field");
             } else if (fields.putIfAbsent(field.getName(), field) != null) {
-                throw new DuplicateFieldException(field.getName(), name);
+                throw new InvalidSchemaException("Duplicate field name found: " + field.getName());
             } else {
                 return this;
             }

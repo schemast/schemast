@@ -1,6 +1,6 @@
 package com.schemast.schemas.fields;
 
-import com.schemast.schemas.DuplicateFieldException;
+import com.schemast.schemas.InvalidSchemaException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class MapField extends Field {
 
     public MapField addField(Field field) {
         if (fields.putIfAbsent(field.getName(), field) != null) {
-            throw new DuplicateFieldException(field.getName(), getName());
+            throw new InvalidSchemaException("Duplicate field found: " + field.getName());
         }
 
         return this;

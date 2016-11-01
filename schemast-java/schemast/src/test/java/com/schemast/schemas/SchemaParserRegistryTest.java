@@ -24,4 +24,19 @@ public class SchemaParserRegistryTest {
         assertNotNull(registry.getParser("mock"));
     }
 
+    @Test(expected = InvalidParserException.class)
+    public void testClassIncorrectlyAnnotatedAsAParser() {
+        registry = new SchemaParserRegistry("com.schemast.hidden_plugins.not_a_parser");
+    }
+
+    @Test(expected = InvalidParserException.class)
+    public void testEmptyTypeAnnotation() {
+        registry = new SchemaParserRegistry("com.schemast.hidden_plugins.invalid");
+    }
+
+    @Test(expected = InvalidParserException.class)
+    public void testDuplicateTypes() {
+        registry = new SchemaParserRegistry("com.schemast.hidden_plugins.duplicate");
+    }
+
 }

@@ -10,21 +10,28 @@ public class SchemaParserRegistry {
     private Map<String, SchemaParser> parsers = new HashMap<>();
 
     public SchemaParserRegistry() {
-        Reflections reflections = new Reflections("com.schemast.plugins");
+        this("com.schemast.plugins");
+    }
+
+    public SchemaParserRegistry(String rootPackage) {
+        Reflections reflections = new Reflections(rootPackage);
         Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(SchemastParser.class);
 
         annotated.forEach(c -> {
             try {
                 Object o = c.newInstance();
                 SchemaParser sp = (SchemaParser) o;
+                String type = sp.getType();
 
-                if (parsers.putIfAbsent(sp.getType(), sp) != null) {
-                    throw new RuntimeException("Duplicate " + SchemastParser.class + " for " + sp.getType() + " found on the classpath");
+                if (type == null || type.isEmpty()) {
+                    throw new InvalidParserException("Type must be a valid string");
+                } else if (parsers.putIfAbsent(type, sp) != null) {
+                    throw new InvalidParserException("Duplicate " + SchemastParser.class + " for type " + type + " found on the classpath");
                 }
             } catch (IllegalAccessException | InstantiationException e) {
                 throw new RuntimeException(e);
             } catch (ClassCastException cce) {
-                throw new RuntimeException("Class annotated with " + SchemastParser.class + "is not an instance of SchemaParser");
+                throw new InvalidParserException("Class annotated with " + SchemastParser.class + "is not an instance of SchemaParser");
             }
         });
     }

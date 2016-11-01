@@ -11,8 +11,7 @@ import com.schemast.schemas.SchemastParser;
 import java.io.IOException;
 
 @SchemastParser(
-    type = "json",
-    version = 1
+    type = "json"
 )
 public class JsonSchemaParser extends SchemaParser {
     private JsonFieldParser fp = new JsonFieldParser();

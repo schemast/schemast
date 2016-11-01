@@ -6,8 +6,7 @@ import com.schemast.schemas.SchemaParser;
 import com.schemast.schemas.fields.StringField;
 
 @SchemastParser(
-    type = "mock",
-    version = 12
+    type = "mock"
 )
 public class MockSchemaParser extends SchemaParser {
 

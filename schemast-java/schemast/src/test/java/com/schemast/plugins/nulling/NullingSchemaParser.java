@@ -5,8 +5,7 @@ import com.schemast.schemas.Schema;
 import com.schemast.schemas.SchemaParser;
 
 @SchemastParser(
-    type = "nulling",
-    version = 12
+    type = "nulling"
 )
 public class NullingSchemaParser extends SchemaParser {
 

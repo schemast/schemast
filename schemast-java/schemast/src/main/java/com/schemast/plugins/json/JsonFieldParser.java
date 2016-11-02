@@ -18,28 +18,27 @@ public class JsonFieldParser {
     }
 
     private Field createField(String name, String type) {
-        switch(type) {
-            case Field.BIG_DECIMAL: return new BigDecimalField(name);
-            case Field.BIG_INTEGER: return new BigIntegerField(name);
-            case Field.BOOLEAN: return new BooleanField(name);
-            case Field.DECIMAL: return new DecimalField(name);
-            case Field.FLOAT: return new FloatField(name);
-            case Field.INTEGER: return new IntegerField(name);
-            case Field.LONG: return new LongField(name);
-            case Field.MAP: return new MapField(name);
-            case Field.STRING: return new StringField(name);
-            default: throw new UnknownFieldTypeException(name, type);
+        switch(Field.Type.getEnum(type)) {
+            case BIG_DECIMAL: return new BigDecimalField(name);
+            case BIG_INTEGER: return new BigIntegerField(name);
+            case BOOLEAN: return new BooleanField(name);
+            case DECIMAL: return new DecimalField(name);
+            case FLOAT: return new FloatField(name);
+            case INTEGER: return new IntegerField(name);
+            case LONG: return new LongField(name);
+            case STRING: return new StringField(name);
+            default: throw new InvalidFieldException("Unknown " + Field.TYPE + " type: " + type);
         }
     }
 
     private void checkIndex(Field field, JsonNode n) {
-        String index = JsonUtils.extractOptionalString(n, Field.INDEX);
+        String index = JsonUtils.extractOptionalString(n, Field.SEARCH);
         if (index != null) {
-            switch (Field.Index.valueOf(index)) {
-                case AS_IS: field.indexed(); break;
+            switch (Field.Search.getEnum(index)) {
+                case MATCH: field.indexed(); break;
                 case FULL: field.tokenized(); break;
                 case NO: field.notIndexed(); break;
-                default: throw new InvalidFieldException("Unknown " + Field.INDEX + " setting: " + index);
+                default: throw new InvalidFieldException("Unknown " + Field.SEARCH + " setting: " + index);
             }
         }
     }
@@ -47,7 +46,7 @@ public class JsonFieldParser {
     private void checkStore(Field field, JsonNode n) {
         String store = JsonUtils.extractOptionalString(n, Field.STORE);
         if (store != null) {
-            switch (Field.Store.valueOf(store)) {
+            switch (Field.Store.getEnum(store)) {
                 case YES: field.stored(); break;
                 case NO: field.notStored(); break;
                 default: throw new InvalidFieldException("Unknown " + Field.STORE + " setting: " + store);

@@ -9,8 +9,8 @@ public class BigIntegerField extends Field implements Defaulted<BigInteger> {
         super(name);
     }
 
-    public String getType() {
-        return Field.BIG_INTEGER;
+    public Field.Type getType() {
+        return Type.BIG_INTEGER;
     }
 
     @Override

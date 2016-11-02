@@ -7,8 +7,8 @@ public class FloatField extends Field implements Defaulted<Float> {
         super(name);
     }
 
-    public String getType() {
-        return Field.FLOAT;
+    public Field.Type getType() {
+        return Type.FLOAT;
     }
 
     @Override

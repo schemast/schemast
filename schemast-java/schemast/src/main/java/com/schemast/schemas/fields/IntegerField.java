@@ -7,8 +7,8 @@ public class IntegerField extends Field implements Defaulted<Integer> {
         super(name);
     }
 
-    public String getType() {
-        return Field.INTEGER;
+    public Field.Type getType() {
+        return Type.INTEGER;
     }
 
     @Override

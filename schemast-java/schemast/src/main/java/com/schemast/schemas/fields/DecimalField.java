@@ -7,8 +7,8 @@ public class DecimalField extends Field implements Defaulted<Double> {
         super(name);
     }
 
-    public String getType() {
-        return Field.DECIMAL;
+    public Field.Type getType() {
+        return Type.DECIMAL;
     }
 
     @Override

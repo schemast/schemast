@@ -1,29 +1,94 @@
 package com.schemast.schemas.fields;
 
 public abstract class Field implements Cloneable {
+
+    public enum Type {
+        ARRAY("array"),
+        BIG_DECIMAL("bigDecimal"),
+        BIG_INTEGER("bigInteger"),
+        BOOLEAN("boolean"),
+        DECIMAL("decimal"),
+        FLOAT("float"),
+        INTEGER("integer"),
+        LONG("long"),
+        MAP("map"),
+        STRING("string");
+
+        private final String name;
+
+        private Type(final String name) {
+            this.name = name;
+        }
+
+        public static Type getEnum(String value) {
+            for (Type v : values()) {
+                if (v.name.equalsIgnoreCase(value)) return v;
+            }
+
+            throw new IllegalArgumentException();
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    public enum Search {
+        FULL("full"), MATCH("match"), NO("no");
+
+        private String name;
+
+        private Search(String name) {
+            this.name = name;
+        }
+
+        public static Search getEnum(String value) {
+            for (Search v : values()) {
+                if (v.name.equalsIgnoreCase(value)) return v;
+            }
+
+            throw new IllegalArgumentException();
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    public enum Store {
+        YES("yes"), NO("no");
+
+        private String name;
+
+        private Store(String name) {
+            this.name = name;
+        }
+
+        public static Store getEnum(String value) {
+            for (Store v : values()) {
+                if (v.name.equalsIgnoreCase(value)) return v;
+            }
+
+            throw new IllegalArgumentException();
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
     public static final String NAME = "name";
     public static final String TYPE = "type";
-    public static final String INDEX = "index";
+    public static final String SEARCH = "search";
     public static final String STORE = "store";
     public static final String REQUIRED = "required";
     public static final String NULLABLE = "nullable";
 
-    public static final String ARRAY = "array";
-    public static final String BIG_DECIMAL = "bigDecimal";
-    public static final String BIG_INTEGER = "bigInteger";
-    public static final String BOOLEAN = "boolean";
-    public static final String DECIMAL = "decimal";
-    public static final String FLOAT = "float";
-    public static final String INTEGER = "integer";
-    public static final String LONG = "long";
-    public static final String MAP = "map";
-    public static final String STRING = "string";
-
-    public enum Index { FULL, AS_IS, NO }
-    public enum Store { YES, NO }
-
     private String name;
-    private Index index;
+    private Search search;
     private Store store;
     private boolean required;
     private boolean nullable;
@@ -32,35 +97,35 @@ public abstract class Field implements Cloneable {
         if (name == null || name.isEmpty()) throw new InvalidFieldException("Field name must be an identifying string");
 
         this.name = name;
-        this.index = Index.NO;
+        this.search = Search.NO;
         this.store = Store.YES;
         this.required = false;
     }
 
-    public abstract String getType();
+    public abstract Type getType();
 
-    public Field setIndex(Index i) {
-        this.index = i;
+    public Field setSearch(Search search) {
+        this.search = search;
         return this;
     }
 
     public Field notIndexed() {
-        this.index = Index.NO;
+        this.search = Search.NO;
         return this;
     }
 
     public Field indexed() {
-        this.index = Index.AS_IS;
+        this.search = Search.MATCH;
         return this;
     }
 
     public Field tokenized() {
-        this.index = Index.FULL;
+        this.search = Search.FULL;
         return this;
     }
 
-    public Field setStored(Store s) {
-        this.store = s;
+    public Field setStored(Store store) {
+        this.store = store;
         return this;
     }
 
@@ -108,8 +173,8 @@ public abstract class Field implements Cloneable {
         return name;
     }
 
-    public Index getIndex() {
-        return index;
+    public Search getSearch() {
+        return search;
     }
 
     public Store getStore() {
@@ -142,14 +207,14 @@ public abstract class Field implements Cloneable {
         if (required != field.required) return false;
         if (nullable != field.nullable) return false;
         if (!name.equals(field.name)) return false;
-        if (index != field.index) return false;
+        if (search != field.search) return false;
         return store == field.store;
     }
 
     @Override
     public int hashCode() {
         int result = name.hashCode();
-        result = 31 * result + index.hashCode();
+        result = 31 * result + search.hashCode();
         result = 31 * result + store.hashCode();
         result = 31 * result + (required ? 1 : 0);
         result = 31 * result + (nullable ? 1 : 0);

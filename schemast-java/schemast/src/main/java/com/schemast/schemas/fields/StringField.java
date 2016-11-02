@@ -9,8 +9,8 @@ public class StringField extends Field implements Defaulted<String> {
         super(name);
     }
 
-    public String getType() {
-        return Field.STRING;
+    public Field.Type getType() {
+        return Type.STRING;
     }
 
     public StringField minLength(long min) {

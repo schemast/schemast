@@ -8,8 +8,8 @@ public class BooleanField extends Field implements Defaulted<Boolean> {
     }
 
     @Override
-    public String getType() {
-        return Field.BOOLEAN;
+    public Field.Type getType() {
+        return Type.BOOLEAN;
     }
 
     @Override

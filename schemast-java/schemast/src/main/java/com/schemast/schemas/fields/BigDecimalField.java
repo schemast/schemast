@@ -9,8 +9,8 @@ public class BigDecimalField extends Field implements Defaulted<BigDecimal> {
         super(name);
     }
 
-    public String getType() {
-        return Field.BIG_DECIMAL;
+    public Field.Type getType() {
+        return Type.BIG_DECIMAL;
     }
 
     @Override

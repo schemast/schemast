@@ -7,8 +7,8 @@ public class LongField extends Field implements Defaulted<Long> {
         super(name);
     }
 
-    public String getType() {
-        return Field.LONG;
+    public Field.Type getType() {
+        return Type.LONG;
     }
 
     @Override

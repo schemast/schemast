@@ -35,8 +35,8 @@ public class JsonTestData extends TestData {
 
     public void buildField(Field f, ObjectNode n) {
         n.put(Field.NAME, f.getName());
-        n.put(Field.TYPE, f.getType());
-        n.put(Field.INDEX, f.getIndex().toString());
+        n.put(Field.TYPE, f.getType().toString());
+        n.put(Field.SEARCH, f.getSearch().toString());
         n.put(Field.STORE, f.getStore().toString());
         n.put(Field.REQUIRED, f.isRequired());
         n.put(Field.NULLABLE, f.isNullable());

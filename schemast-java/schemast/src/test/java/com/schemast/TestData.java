@@ -26,12 +26,12 @@ public class TestData {
     public List<Field> buildAllBasicPermutations(Field f) {
         List<Field> perms = new ArrayList<>();
 
-        for (Field.Index i : Field.Index.values()) {
+        for (Field.Search i : Field.Search.values()) {
             for (Field.Store s : Field.Store.values()) {
                 IntStream.range(0,2).forEach(nu -> {
                     IntStream.range(0,2).forEach(req -> {
                         Field clone = (Field) f.clone();
-                        clone.setIndex(i).setStored(s).setNullable(nu != 0).setRequired(req != 0);
+                        clone.setSearch(i).setStored(s).setNullable(nu != 0).setRequired(req != 0);
                         perms.add(clone);
                     });
                 });

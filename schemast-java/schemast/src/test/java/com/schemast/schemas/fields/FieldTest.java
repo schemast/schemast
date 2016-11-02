@@ -8,7 +8,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class FieldTest {
-    private static final String FIELD_NAME = "myField";
 
     private class MyField extends Field {
         MyField(String n) {
@@ -16,8 +15,8 @@ public class FieldTest {
         }
 
         @Override
-        public String getType() {
-            return FIELD_NAME;
+        public Type getType() {
+            return Type.STRING;
         }
     }
 
@@ -25,7 +24,7 @@ public class FieldTest {
 
     @Before
     public void doBefore() {
-        f = new MyField(FIELD_NAME);
+        f = new MyField("myField");
     }
 
     @Test(expected = InvalidFieldException.class)
@@ -40,17 +39,17 @@ public class FieldTest {
 
     @Test
     public void testNotIndexed() {
-        assertEquals(Field.Index.NO, f.notIndexed().getIndex());
+        assertEquals(Field.Search.NO, f.notIndexed().getSearch());
     }
 
     @Test
     public void testIndexed() {
-        assertEquals(Field.Index.AS_IS, f.indexed().getIndex());
+        assertEquals(Field.Search.MATCH, f.indexed().getSearch());
     }
 
     @Test
     public void testTokenized() {
-        assertEquals(Field.Index.FULL, f.tokenized().getIndex());
+        assertEquals(Field.Search.FULL, f.tokenized().getSearch());
     }
 
     @Test

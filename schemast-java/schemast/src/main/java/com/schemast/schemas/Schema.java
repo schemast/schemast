@@ -1,83 +1,62 @@
 package com.schemast.schemas;
 
-import com.schemast.schemas.fields.Field;
+import com.schemast.elements.Element;
 
 import java.util.*;
 
 public class Schema {
-    public static final String DEFAULT_NAMESPACE = "default";
+    public static final String METADATA = "metadata";
+    public static final String STRUCTURE = "structure";
 
-    private String namespace;
-    private String name;
-    private int version;
-    private Map<String, Field> fields;
+    private Metadata metadata;
+    private Structure structure;
 
     public static class Builder {
-        private String namespace = DEFAULT_NAMESPACE;
-        private String name = null;
-        private int version = -1;
-        private Map<String, Field> fields = new HashMap<>();
+        private Metadata metadata;
+        private Structure structure = new Structure();
 
-        public Builder namespace(String namespace) {
-            this.namespace = namespace;
+        public Builder metadata(Metadata metadata) {
+            this.metadata = metadata;
             return this;
         }
 
-        public Builder name(String name) {
-            this.name = name;
+        public Builder append(Element e) {
+            structure.append(e);
             return this;
-        }
-
-        public Builder version(int version) {
-            this.version = version;
-            return this;
-        }
-
-        public Builder field(Field field) {
-            if (field == null) {
-                throw new NullPointerException("Cannot add a null field");
-            } else if (fields.putIfAbsent(field.getName(), field) != null) {
-                throw new InvalidSchemaException("Duplicate field name found: " + field.getName());
-            } else {
-                return this;
-            }
         }
 
         public Schema build() {
-            if (namespace == null || namespace.isEmpty()) throw new InvalidSchemaException("Schema namespace must be a valid string");
-            if (name == null || name.isEmpty()) throw new InvalidSchemaException("Schema name must be an identifying string");
-            if (version < 1) throw new InvalidSchemaException("Schema version must be greater than 0");
-            if (fields.isEmpty()) throw new InvalidSchemaException("Schemas require one or more fields");
-
-            return new Schema(namespace, name, version, Collections.unmodifiableMap(fields));
+            if (metadata == null)
+                throw new InvalidSchemaException(METADATA + " is required");
+            if (structure.isEmpty())
+                throw new InvalidSchemaException(STRUCTURE + " must have at least 1 element");
+            else
+                return new Schema(metadata, structure);
         }
     }
 
-    Schema(String namespace, String name, int version, Map<String, Field> fields) {
-        this.namespace = namespace;
-        this.name = name;
-        this.version = version;
-        this.fields = fields;
+    Schema(Metadata metadata, Structure structure) {
+        this.metadata = metadata;
+        this.structure = structure;
     }
 
     public String getNamespace() {
-        return namespace;
+        return metadata.getNamespace();
     }
 
     public String getName() {
-        return name;
+        return metadata.getName();
     }
 
     public int getVersion() {
-        return version;
+        return metadata.getVersion();
     }
 
-    public Field getField(String fieldName) {
-        return fields.get(fieldName);
+    public Element find(String label) {
+        return structure.find(label);
     }
 
-    public Collection<Field> getFields() {
-        return fields.values();
+    public Collection<Element> getAll() {
+        return structure.getAll();
     }
-
 }

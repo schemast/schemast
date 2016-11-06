@@ -13,7 +13,7 @@ public class SchemaParserRegistry {
     }
 
     public SchemaParserRegistry(String basePackage) {
-        this(Arrays.asList(basePackage));
+        this(Collections.singletonList(basePackage));
     }
 
     public SchemaParserRegistry(String[] basePackages) {
@@ -26,6 +26,7 @@ public class SchemaParserRegistry {
     }
 
     public SchemaParserRegistry addPackage(String pack) {
+        if (pack == null || pack.isEmpty()) throw new SchemaParserException("Cannot add a null or empty package");
         reflectPackage(pack);
         return this;
     }
@@ -43,7 +44,7 @@ public class SchemaParserRegistry {
             String type = sp.getType();
 
             if (type == null || type.isEmpty()) {
-                throw new SchemaParserException(SchemastParser.class + " type must be a valid string");
+                throw new SchemaParserException(SchemastParser.class + " type must be a valid ofString");
             } else if (parsers.putIfAbsent(type, sp) != null) {
                 throw new SchemaParserException(
                         "Duplicate " + SchemastParser.class + " for type " + type + " found on the classpath");
@@ -55,7 +56,7 @@ public class SchemaParserRegistry {
 
     public SchemaParser getParser(String type) {
         if (type == null || type.isEmpty())
-            throw new SchemaParserException("Parser type must be a valid string");
+            throw new SchemaParserException("Parser type must be a valid ofString");
         else
             return parsers.get(type);
     }

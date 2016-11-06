@@ -2,79 +2,54 @@ package com.schemast.elements;
 
 public abstract class Element {
     public static final String ELEMENT = "element";
+    public static final String ELEMENTS = "elements";
     public static final String LABEL = "label";
+    public static final String TYPE = "type";
+    public static final String OPTIONAL = "optional";
+
+    public static final String TYPE_BOOLEAN = "boolean";
+    public static final String TYPE_INTEGER = "ofInt";
+    public static final String TYPE_MAP = "ofMap";
+    public static final String TYPE_STRING = "ofString";
+
+    public static class Builder {
+
+        public BooleanElement.Builder ofBoolean(String label) {
+            return new BooleanElement.Builder(label);
+        }
+
+	    public IntElement.Builder ofInt(String label) {
+		    return new IntElement.Builder(label);
+	    }
+
+        public MapElement.Builder ofMap(String label) {
+            return new MapElement.Builder(label);
+        }
+
+        public StringElement.Builder ofString(String label) {
+            return new StringElement.Builder(label);
+        }
+    }
 
     private String label;
+    private String type;
+    private boolean optional;
+
+    protected Element(String label, String type, boolean optional) {
+        this.label = label;
+        this.type = type;
+        this.optional = optional;
+    }
 
     public String getLabel() {
         return label;
     }
 
-    protected Element(String label) {
-        this.label = label;
+    public String getType() {
+        return type;
     }
 
-//    public enum Type {
-//        ARRAY("array"),
-//        ENUM("enum"),
-//        MAP("map"),
-//        SUBTYPE("subtype"),
-//        FIELD("field");
-//
-//        private final String name;
-//
-//        private Type(final String name) {
-//            this.name = name;
-//        }
-//
-//        public static Type getEnum(String value) {
-//            for (Type v : values()) {
-//                if (v.name.equalsIgnoreCase(value)) return v;
-//            }
-//
-//            throw new IllegalArgumentException();
-//        }
-//
-//        @Override
-//        public String toString() {
-//            return name;
-//        }
-//
-//    }
-//
-//    public static class Builder {
-//        private String label;
-//
-//        public Builder label(String label) {
-//            this.label = label;
-//            return this;
-//        }
-//
-//        public ElementBuilder type(Type type) {
-//            if (type == null) {
-//                throw new InvalidElementException("Element " + TYPE + " is required");
-//            } else {
-//                switch (type) {
-//                    case ARRAY: return new ArrayElement.Builder(label);
-//                    case ENUM: return new EnumElement.Builder(label);
-//                    case FIELD: return new FieldElement.Builder(label);
-//                    case MAP: return new MapElement.Builder(label);
-//                    case SUBTYPE: return new SubtypeElement.Builder(label);
-//                    default: throw new InvalidElementException("Element " + TYPE + " is unknown");
-//                }
-//            }
-//        }
-//    }
-//
-//    private Type type;
-//
-//    Element(String label, Type type) {
-//        this.label = label;
-//        this.type = type;
-//    }
-//
-//    public Type getType() {
-//        return type;
-//    }
-//
+    public boolean isOptional() {
+        return optional;
+    }
 }

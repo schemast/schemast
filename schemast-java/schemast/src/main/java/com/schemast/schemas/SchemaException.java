@@ -9,5 +9,4 @@ public class SchemaException extends RuntimeException {
     public SchemaException(Throwable t) {
         super(t);
     }
-
 }

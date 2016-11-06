@@ -1,6 +1,7 @@
 package test;
 
-import com.schemast.schemas.Metadata;
+import com.schemast.elements.Element;
+import com.schemast.schemas.Header;
 import com.schemast.schemas.Schema;
 
 public class TestData {
@@ -13,8 +14,12 @@ public class TestData {
     protected static final String LABEL = "myField";
     protected static final String LABEL2 = "myField2";
 
-    protected Metadata testMetadata() {
-        return new Metadata.Builder().namespace(NAMESPACE).name(NAME).version(VERSION).build();
+    protected Header testHeader() {
+        return testHeader(NAMESPACE, NAME, VERSION);
+    }
+
+    protected Header testHeader(String namespace, String name, int version) {
+        return new Header(namespace, name, version);
     }
 
     protected Schema testSchema() {
@@ -22,8 +27,16 @@ public class TestData {
     }
 
     protected Schema testSchema(String namespace, String name, int version) {
-        Metadata m = new Metadata.Builder().name(name).namespace(namespace).version(version).build();
-        return new Schema.Builder().metadata(m).append(new MockElement(LABEL)).build();
+        Header h = testHeader(namespace, name, version);
+        return new Schema(h).append(mockElement());
+    }
+
+    protected Element mockElement() {
+        return mockElement(LABEL);
+    }
+
+    protected Element mockElement(String label) {
+        return new MockElement(label);
     }
 
 //    protected final List<Element> allFields = null; //TODO: buildAllFields();
@@ -36,8 +49,8 @@ public class TestData {
 //        return booleanFieldBuilder(label).build();
 //    }
 //
-//    protected BooleanFieldElement.Builder booleanFieldBuilder(String label) {
-//        return new BooleanFieldElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
+//    protected BooleanElement.Builder booleanFieldBuilder(String label) {
+//        return new BooleanElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
 //    }
 //
 //    protected Element decimalField() {
@@ -60,8 +73,8 @@ public class TestData {
 //        return intFieldBuilder(label).build();
 //    }
 //
-//    protected IntFieldElement.Builder intFieldBuilder(String label) {
-//        return new IntFieldElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
+//    protected IntElement.Builder intFieldBuilder(String label) {
+//        return new IntElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
 //    }
 //
 //    protected Element stringField() {
@@ -72,16 +85,16 @@ public class TestData {
 //        return stringFieldBuilder(label).build();
 //    }
 //
-//    protected StringFieldElement.Builder stringFieldBuilder(String label) {
-//        return new StringFieldElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
+//    protected StringElement.Builder stringFieldBuilder(String label) {
+//        return new StringElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
 //    }
 //
 //    private List<Element> buildAllFields() {
 //        List<Element> fields = new ArrayList<>();
-//        fields.add(new BooleanFieldElement.Builder(SchemaParserBaseTest.BOOLEAN_FIELD_NAME).build());
+//        fields.add(new BooleanElement.Builder(SchemaParserBaseTest.BOOLEAN_FIELD_NAME).build());
 //        fields.add(new DecimalFieldElement.Builder(SchemaParserBaseTest.DECIMAL_FIELD_NAME).build());
-//        fields.add(new IntFieldElement.Builder(SchemaParserBaseTest.INTEGER_FIELD_NAME).build());
-//        fields.add(new StringFieldElement.Builder(SchemaParserBaseTest.STRING_FIELD_NAME).build());
+//        fields.add(new IntElement.Builder(SchemaParserBaseTest.INTEGER_FIELD_NAME).build());
+//        fields.add(new StringElement.Builder(SchemaParserBaseTest.STRING_FIELD_NAME).build());
 //        return fields;
 //    }
 //
@@ -100,8 +113,6 @@ public class TestData {
 //        }
 //
 //        return perms;
-//        //TODO:
-//        return null;
 //    }
 
 }

@@ -2,61 +2,51 @@ package com.schemast.schemas;
 
 import com.schemast.elements.Element;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Schema {
-    public static final String METADATA = "metadata";
+    public static final String HEADER = "header";
     public static final String STRUCTURE = "structure";
 
-    private Metadata metadata;
-    private Structure structure;
+    private Header header;
+	private Map<String, Element> structure = new HashMap<>();
 
-    public static class Builder {
-        private Metadata metadata;
-        private Structure structure = new Structure();
-
-        public Builder metadata(Metadata metadata) {
-            this.metadata = metadata;
-            return this;
-        }
-
-        public Builder append(Element e) {
-            structure.append(e);
-            return this;
-        }
-
-        public Schema build() {
-            if (metadata == null)
-                throw new InvalidSchemaException(METADATA + " is required");
-            if (structure.isEmpty())
-                throw new InvalidSchemaException(STRUCTURE + " must have at least 1 element");
-            else
-                return new Schema(metadata, structure);
-        }
+    public Schema(Header header) {
+	    if (header == null) throw new InvalidSchemaException(HEADER + " cannot be null");
+        this.header = header;
     }
 
-    Schema(Metadata metadata, Structure structure) {
-        this.metadata = metadata;
-        this.structure = structure;
+	public Schema append(Element e) {
+		if (e == null) {
+			throw new InvalidSchemaException("Cannot add a null " + Element.ELEMENT);
+		} else if (structure.putIfAbsent(e.getLabel(), e) != null) {
+			throw new InvalidSchemaException(
+					String.format("Duplicate %s '%s' found: %s", Element.ELEMENT, Element.LABEL, e.getLabel()));
+		}
+
+		return this;
+	}
+
+    public Header getHeader() {
+        return header;
     }
 
     public String getNamespace() {
-        return metadata.getNamespace();
+        return header.getNamespace();
     }
 
     public String getName() {
-        return metadata.getName();
+        return header.getName();
     }
 
     public int getVersion() {
-        return metadata.getVersion();
+        return header.getVersion();
     }
 
-    public Element find(String label) {
-        return structure.find(label);
-    }
-
-    public Collection<Element> getAll() {
-        return structure.getAll();
-    }
+	public Collection<Element> getStructure() {
+		return Collections.unmodifiableCollection(structure.values());
+	}
 }

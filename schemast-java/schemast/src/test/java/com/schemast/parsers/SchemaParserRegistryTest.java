@@ -112,6 +112,16 @@ public class SchemaParserRegistryTest {
     }
 
     @Test(expected = SchemaParserException.class)
+    public void testAddPackageWithNull() {
+        registry = new SchemaParserRegistry().addPackage(null);
+    }
+
+    @Test(expected = SchemaParserException.class)
+    public void testAddPackageWithEmptyPackage() {
+        registry = new SchemaParserRegistry().addPackage("");
+    }
+
+    @Test(expected = SchemaParserException.class)
     public void testEmptyTypeAnnotation() {
         registry = new SchemaParserRegistry(INVALID_PACKAGE);
     }

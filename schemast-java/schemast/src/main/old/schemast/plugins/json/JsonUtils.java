@@ -1,4 +1,4 @@
-package com.schemast.plugins.json;
+package com.schemast.elements.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.schemast.schemas.elements.fields.InvalidFieldException;

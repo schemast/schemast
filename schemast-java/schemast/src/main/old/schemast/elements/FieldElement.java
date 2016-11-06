@@ -1,8 +1,14 @@
-package com.schemast.schemas.elements;
+package com.schemast.elements;
 
-import com.schemast.schemas.elements.fields.*;
+public class FieldElement extends Element {
+    public static final String BOOLEAN_FIELD = "boolean";
+    public static final String DECIMAL_FIELD = "decimal";
+    public static final String INT_FIELD = "int";
+    public static final String STRING_FIELD = "ofString";
 
-public class FieldElement extends Element implements Cloneable {
+    protected FieldElement(String label, String type) {
+        super(label, type);
+    }
 
     public static class Builder extends ElementBuilder {
         private FieldBuilder fb;
@@ -41,32 +47,6 @@ public class FieldElement extends Element implements Cloneable {
             }
         }
 
-    }
-
-    public enum FieldType {
-        BOOLEAN("boolean"),
-        DECIMAL("decimal"),
-        INTEGER("int"),
-        STRING("string");
-
-        private final String name;
-
-        private FieldType(final String name) {
-            this.name = name;
-        }
-
-        public static FieldType getEnum(String value) {
-            for (FieldType v : values()) {
-                if (v.name.equalsIgnoreCase(value)) return v;
-            }
-
-            throw new IllegalArgumentException();
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
     }
 
     public enum Search {
@@ -121,7 +101,6 @@ public class FieldElement extends Element implements Cloneable {
     public static final String REQUIRED = "required";
     public static final String NULLABLE = "nullable";
 
-    private FieldType fieldType;
     private Search search;
     private Store store;
     private boolean required;
@@ -157,36 +136,36 @@ public class FieldElement extends Element implements Cloneable {
         return nullable;
     }
 
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FieldElement)) return false;
-
-        FieldElement that = (FieldElement) o;
-
-        if (required != that.required) return false;
-        if (nullable != that.nullable) return false;
-        if (fieldType != that.fieldType) return false;
-        if (search != that.search) return false;
-        return store == that.store;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = fieldType != null ? fieldType.hashCode() : 0;
-        result = 31 * result + (search != null ? search.hashCode() : 0);
-        result = 31 * result + (store != null ? store.hashCode() : 0);
-        result = 31 * result + (required ? 1 : 0);
-        result = 31 * result + (nullable ? 1 : 0);
-        return result;
-    }
+//    public Object clone() {
+//        try {
+//            return super.clone();
+//        } catch (CloneNotSupportedException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof FieldElement)) return false;
+//
+//        FieldElement that = (FieldElement) o;
+//
+//        if (required != that.required) return false;
+//        if (nullable != that.nullable) return false;
+//        if (fieldType != that.fieldType) return false;
+//        if (search != that.search) return false;
+//        return store == that.store;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = fieldType != null ? fieldType.hashCode() : 0;
+//        result = 31 * result + (search != null ? search.hashCode() : 0);
+//        result = 31 * result + (store != null ? store.hashCode() : 0);
+//        result = 31 * result + (required ? 1 : 0);
+//        result = 31 * result + (nullable ? 1 : 0);
+//        return result;
+//    }
 
 }

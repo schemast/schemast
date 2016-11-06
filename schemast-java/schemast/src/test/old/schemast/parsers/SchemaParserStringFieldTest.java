@@ -10,8 +10,8 @@
 //public class SchemaParserStringFieldTest extends SchemaParserBaseFieldTest<String> {
 //
 //    @Override
-//    protected StringFieldElement newField(String fieldName) {
-//        return new StringFieldElement(fieldName).minLength(3).maxLength(4);
+//    protected StringElement newField(String fieldName) {
+//        return new StringElement(fieldName).minLength(3).maxLength(4);
 //    }
 //
 //    @Override
@@ -32,74 +32,74 @@
 //
 //    @Test
 //    public void testSetDefaultThenHigherMinLength() {
-//        StringFieldElement f = new StringFieldElement(FIELD_NAME).withDefault("good").minLength(2);
+//        StringElement f = new StringElement(FIELD_NAME).withDefault("good").minLength(2);
 //        assertTrue(testOutput(f));
 //    }
 //
 //    @Test
 //    public void testSetDefaultThenEqualMinLength() {
-//        StringFieldElement f = new StringFieldElement(FIELD_NAME).withDefault("good").minLength(4);
+//        StringElement f = new StringElement(FIELD_NAME).withDefault("good").minLength(4);
 //        assertTrue(testOutput(f));
 //    }
 //
 //    @Test(expected = InvalidFieldException.class)
 //    public void testSetDefaultThenLowerMinLength() {
-//        new StringFieldElement(FIELD_NAME).withDefault("bad").minLength(4);
+//        new StringElement(FIELD_NAME).withDefault("bad").minLength(4);
 //    }
 //
 //    @Test
 //    public void testSetDefaultThenHigherMaxLength() {
-//        StringFieldElement f = new StringFieldElement(FIELD_NAME).withDefault("good").maxLength(5);
+//        StringElement f = new StringElement(FIELD_NAME).withDefault("good").maxLength(5);
 //        assertTrue(testOutput(f));
 //    }
 //
 //    @Test
 //    public void testSetDefaultThenEqualMaxLength() {
-//        StringFieldElement f = new StringFieldElement(FIELD_NAME).withDefault("good").maxLength(4);
+//        StringElement f = new StringElement(FIELD_NAME).withDefault("good").maxLength(4);
 //        assertTrue(testOutput(f));
 //    }
 //
 //    @Test(expected = InvalidFieldException.class)
 //    public void testSetDefaultThenLowerMaxLength() {
-//        new StringFieldElement(FIELD_NAME).withDefault("bad").maxLength(2);
+//        new StringElement(FIELD_NAME).withDefault("bad").maxLength(2);
 //    }
 //
 //    @Test(expected = InvalidFieldException.class)
 //    public void testSetMinLengthBelowZero() {
-//        new StringFieldElement(FIELD_NAME).minLength(-1);
+//        new StringElement(FIELD_NAME).minLength(-1);
 //    }
 //
 //    @Test
 //    public void testSetMinLengthBelowMaxLength() {
-//        StringFieldElement f = new StringFieldElement(FIELD_NAME).maxLength(5).minLength(3);
+//        StringElement f = new StringElement(FIELD_NAME).maxLength(5).minLength(3);
 //        assertTrue(testOutput(f));
 //    }
 //
 //    @Test
 //    public void testSetMinLengthAtMaxLength() {
-//        StringFieldElement f = new StringFieldElement(FIELD_NAME).maxLength(3).minLength(3);
+//        StringElement f = new StringElement(FIELD_NAME).maxLength(3).minLength(3);
 //        assertTrue(testOutput(f));
 //    }
 //
 //    @Test(expected = InvalidFieldException.class)
 //    public void testSetMinLengthAboveMaxLength() {
-//        new StringFieldElement(FIELD_NAME).maxLength(5).minLength(7);
+//        new StringElement(FIELD_NAME).maxLength(5).minLength(7);
 //    }
 //
 //    @Test(expected = InvalidFieldException.class)
 //    public void testSetMaxLengthBelowMinLength() {
-//        new StringFieldElement(FIELD_NAME).minLength(5).maxLength(3);
+//        new StringElement(FIELD_NAME).minLength(5).maxLength(3);
 //    }
 //
 //    @Test
 //    public void testSetMaxLengthAtMinLength() {
-//        StringFieldElement f = new StringFieldElement(FIELD_NAME).minLength(5).maxLength(5);
+//        StringElement f = new StringElement(FIELD_NAME).minLength(5).maxLength(5);
 //        assertTrue(testOutput(f));
 //    }
 //
 //    @Test
 //    public void testSetMaxLengthAboveMinLength() {
-//        StringFieldElement f = new StringFieldElement(FIELD_NAME).minLength(5).maxLength(7);
+//        StringElement f = new StringElement(FIELD_NAME).minLength(5).maxLength(7);
 //        assertTrue(testOutput(f));
 //    }
 //

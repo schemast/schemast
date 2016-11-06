@@ -1,12 +1,8 @@
-package com.schemast.plugins.json;
+package com.schemast.elements.json;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.schemast.parsers.SchemaParserBase;
 import com.schemast.parsers.SchemastParser;
 import com.schemast.schemas.Schema;
-import java.io.IOException;
 
 @SchemastParser(
     type = "json"

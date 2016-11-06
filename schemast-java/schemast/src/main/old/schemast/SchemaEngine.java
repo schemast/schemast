@@ -1,13 +1,15 @@
 package com.schemast;
 
-import com.schemast.repositories.SchemaRepo;
+import com.schemast.parsers.SchemaParser;
+import com.schemast.parsers.SchemaParserRegistry;
+import com.schemast.repositories.SchemaRepository;
 import com.schemast.schemas.*;
 
 public class SchemaEngine {
     private SchemaParserRegistry registry = new SchemaParserRegistry();
-    private SchemaRepo repo;
+    private SchemaRepository repo;
 
-    public SchemaEngine(SchemaRepo repo) {
+    public SchemaEngine(SchemaRepository repo) {
         this.repo = repo;
     }
 

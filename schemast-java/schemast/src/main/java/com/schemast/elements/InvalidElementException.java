@@ -1,8 +1,8 @@
 package com.schemast.elements;
 
-import com.schemast.schemas.SchemaException;
+import com.schemast.SchemastException;
 
-public class InvalidElementException extends SchemaException {
+public class InvalidElementException extends SchemastException {
 
     public InvalidElementException(String msg) {
         super(msg);

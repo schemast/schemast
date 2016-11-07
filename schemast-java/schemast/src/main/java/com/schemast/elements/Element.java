@@ -1,48 +1,35 @@
 package com.schemast.elements;
 
-public abstract class Element {
-    public static final String ELEMENT = "element";
-    public static final String ELEMENTS = "elements";
-    public static final String LABEL = "label";
-    public static final String TYPE = "type";
-    public static final String OPTIONAL = "optional";
+import com.schemast.util.Named;
 
-    public static final String TYPE_BOOLEAN = "boolean";
-    public static final String TYPE_INTEGER = "ofInt";
-    public static final String TYPE_MAP = "ofMap";
-    public static final String TYPE_STRING = "ofString";
+public abstract class Element extends Named {
 
     public static class Builder {
 
-        public BooleanElement.Builder ofBoolean(String label) {
-            return new BooleanElement.Builder(label);
+        public BooleanElement.Builder ofBoolean(String name) {
+            return new BooleanElement.Builder(name);
         }
 
-	    public IntElement.Builder ofInt(String label) {
-		    return new IntElement.Builder(label);
+	    public IntElement.Builder ofInt(String name) {
+		    return new IntElement.Builder(name);
 	    }
 
-        public MapElement.Builder ofMap(String label) {
-            return new MapElement.Builder(label);
+        public MapElement.Builder ofMap(String name) {
+            return new MapElement.Builder(name);
         }
 
-        public StringElement.Builder ofString(String label) {
-            return new StringElement.Builder(label);
+        public StringElement.Builder ofString(String name) {
+            return new StringElement.Builder(name);
         }
     }
 
-    private String label;
     private String type;
     private boolean optional;
 
-    protected Element(String label, String type, boolean optional) {
-        this.label = label;
+    protected Element(String name, String type, boolean optional) {
+	    super(name);
         this.type = type;
         this.optional = optional;
-    }
-
-    public String getLabel() {
-        return label;
     }
 
     public String getType() {

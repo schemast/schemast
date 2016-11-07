@@ -1,7 +1,8 @@
 package test;
 
 import com.schemast.elements.Element;
-import com.schemast.schemas.Header;
+import com.schemast.models.Header;
+import com.schemast.schemas.Metadata;
 import com.schemast.schemas.Schema;
 
 public class TestData {
@@ -11,15 +12,23 @@ public class TestData {
     protected static final String NAME2 = "mySchema2";
     protected static final int VERSION = 4;
     protected static final int VERSION2 = 5;
-    protected static final String LABEL = "myField";
-    protected static final String LABEL2 = "myField2";
+    protected static final String FIELD_NAME = "myField";
+    protected static final String FIELD_NAME2 = "myField2";
 
     protected Header testHeader() {
-        return testHeader(NAMESPACE, NAME, VERSION);
+        return testHeader(NAMESPACE);
     }
 
-    protected Header testHeader(String namespace, String name, int version) {
-        return new Header(namespace, name, version);
+    protected Header testHeader(String namespace) {
+        return new Header(namespace);
+    }
+
+    protected Metadata testMetadata() {
+        return testMetadata(NAME,VERSION);
+    }
+
+    protected Metadata testMetadata(String name, int version) {
+        return new Metadata.Builder().name(name).version(version).build();
     }
 
     protected Schema testSchema() {
@@ -27,16 +36,15 @@ public class TestData {
     }
 
     protected Schema testSchema(String namespace, String name, int version) {
-        Header h = testHeader(namespace, name, version);
-        return new Schema(h).append(mockElement());
+        return new Schema.Builder(namespace).metadata(testMetadata(name, version)).append(mockElement()).build();
     }
 
     protected Element mockElement() {
-        return mockElement(LABEL);
+        return mockElement(FIELD_NAME);
     }
 
-    protected Element mockElement(String label) {
-        return new MockElement(label);
+    protected Element mockElement(String name) {
+        return new MockElement(name);
     }
 
 //    protected final List<Element> allFields = null; //TODO: buildAllFields();

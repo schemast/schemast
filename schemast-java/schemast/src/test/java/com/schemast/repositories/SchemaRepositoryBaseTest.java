@@ -61,15 +61,15 @@ public abstract class SchemaRepositoryBaseTest extends TestData {
         repo.put(second);
         repo.put(secondV2);
 
-        assertEquals(VERSION, repo.get(NAMESPACE2, NAME2, VERSION).getVersion());
-        assertEquals(VERSION2, repo.get(NAMESPACE2, NAME2, VERSION2).getVersion());
+        assertEquals(VERSION, repo.get(NAMESPACE2, NAME2, VERSION).getMetadata().getVersion());
+        assertEquals(VERSION2, repo.get(NAMESPACE2, NAME2, VERSION2).getMetadata().getVersion());
     }
 
     @Test
     public void testPutTwoVersionsOfSameSchemaGetRetrievesLatest() {
         repo.put(second);
         repo.put(secondV2);
-        assertEquals(VERSION2, repo.get(NAMESPACE2, NAME2).getVersion());
+        assertEquals(VERSION2, repo.get(NAMESPACE2, NAME2).getMetadata().getVersion());
     }
 
     @Test
@@ -78,11 +78,11 @@ public abstract class SchemaRepositoryBaseTest extends TestData {
         repo.put(second);
         repo.put(secondV2);
 
-        assertEquals(VERSION, repo.get(NAMESPACE, NAME).getVersion());
-        assertEquals(VERSION, repo.get(NAMESPACE, NAME, VERSION).getVersion());
-        assertEquals(VERSION2, repo.get(NAMESPACE2, NAME2).getVersion());
-        assertEquals(VERSION, repo.get(NAMESPACE2, NAME2, VERSION).getVersion());
-        assertEquals(VERSION2, repo.get(NAMESPACE2, NAME2, VERSION2).getVersion());
+        assertEquals(VERSION, repo.get(NAMESPACE, NAME).getMetadata().getVersion());
+        assertEquals(VERSION, repo.get(NAMESPACE, NAME, VERSION).getMetadata().getVersion());
+        assertEquals(VERSION2, repo.get(NAMESPACE2, NAME2).getMetadata().getVersion());
+        assertEquals(VERSION, repo.get(NAMESPACE2, NAME2, VERSION).getMetadata().getVersion());
+        assertEquals(VERSION2, repo.get(NAMESPACE2, NAME2, VERSION2).getMetadata().getVersion());
     }
 
     @Test(expected = SchemaRepositoryException.class)
@@ -156,7 +156,7 @@ public abstract class SchemaRepositoryBaseTest extends TestData {
 
         assertTrue(repo.delete(NAMESPACE2, NAME2, VERSION2));
         assertNull(repo.get(NAMESPACE2, NAME2, VERSION2));
-        assertEquals(VERSION, repo.get(NAMESPACE2, NAME2).getVersion());
+        assertEquals(VERSION, repo.get(NAMESPACE2, NAME2).getMetadata().getVersion());
     }
 
     @Test
@@ -234,5 +234,4 @@ public abstract class SchemaRepositoryBaseTest extends TestData {
         repo.put(first);
         repo.delete(NAMESPACE, "");
     }
-
 }

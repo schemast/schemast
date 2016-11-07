@@ -10,7 +10,7 @@ public class BooleanElementBuilderTest extends ElementTestBase {
 
 	@Override
 	protected void setType() {
-		b = new Element.Builder().ofBoolean(LABEL);
+		b = new Element.Builder().ofBoolean(NAME);
 		super.b = b;
 	}
 

@@ -1,0 +1,110 @@
+{
+  "header": {
+    "namespace": "myNamespace"
+  },
+  "schemas": [{
+    "metadata": {
+      "schemaName": "firstSchema",
+      "version": 4
+    },
+    "structure": {
+      "widget": {
+        "type": "map",
+        "elements": {
+          "debug": {
+            "type": "enum",
+            "values": [
+              "on",
+              "off"
+            ],
+            "default": "off"
+          },
+          "window": {
+            "type": "map",
+            "elements": {
+              "title": {
+                "type": "string",
+                "optional": false,
+                "pattern": "\\p{Alpha}+\\w*",
+                "minLength": 4,
+                "maxLength": 50
+              },
+              "name": {
+                "type": "string",
+                "optional": true
+              },
+              "width": {
+                "type": "int",
+                "optional": true
+              },
+              "height": {
+                "type": "int",
+                "optional": true
+              }
+            }
+          },
+          "image": {
+            "type": "map",
+            "optional": true,
+            "elements": {
+              "src": {
+                "type": "string",
+                "optional": false
+              },
+              "name": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "text": {
+            "type": "map",
+            "elements": {
+              "style": {
+                "type": "array",
+                "values": [
+                  "bold",
+                  "italic",
+                  "normal"
+                ],
+                "default": [
+                  "normal"
+                ]
+              },
+              "hOffset": {
+                "type": "int",
+                "optional": true,
+                "minValue": 0
+              },
+              "vOffset": {
+                "type": "int",
+                "optional": true,
+                "minValue": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  }, {
+    "metadata": {
+      "schemaName": "secondSchema",
+      "version": 1
+    },
+    "structure": {
+      "menu": {
+        "type": "map",
+        "elements": {
+          "main": {
+            "type": "sequence",
+            "minLength": 2,
+            "maxLength": 10
+          },
+          "items": {
+            "type": "props"
+          }
+        }
+      }
+    }
+  }]
+}

@@ -11,7 +11,7 @@ public class IntElementBuilderTest extends ElementTestBase {
 
 	@Override
 	protected void setType() {
-		b = new Element.Builder().ofInt(LABEL);
+		b = new Element.Builder().ofInt(NAME);
 		super.b = b;
 	}
 

@@ -6,5 +6,4 @@ public abstract class SchemaParserBase implements SchemaParser {
     public String getType() {
         return getClass().getAnnotation(SchemastParser.class).type();
     }
-
 }

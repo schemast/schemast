@@ -1,4 +1,4 @@
-package com.schemast.elements;
+package com.schemast.util;
 
 import org.junit.Test;
 

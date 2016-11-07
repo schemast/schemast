@@ -13,7 +13,7 @@ public class StringElementBuilderTest extends ElementTestBase {
 
 	@Override
 	protected void setType() {
-		b = new Element.Builder().ofString(LABEL);
+		b = new Element.Builder().ofString(NAME);
 		super.b = b;
 	}
 

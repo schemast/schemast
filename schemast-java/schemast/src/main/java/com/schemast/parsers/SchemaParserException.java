@@ -9,5 +9,4 @@ public class SchemaParserException extends RuntimeException {
     public SchemaParserException(String msg) {
         super(msg);
     }
-
 }

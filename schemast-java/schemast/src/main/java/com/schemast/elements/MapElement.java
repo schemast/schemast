@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.schemast.Constants.ELEMENT;
+import static com.schemast.Constants.TYPE_MAP;
+
 public class MapElement extends Element {
 
     static class Builder extends ElementBuilder {
@@ -22,8 +25,8 @@ public class MapElement extends Element {
         public Builder add(Element element) {
             if (element == null)
                 throw new InvalidElementException("Cannot add a null " + ELEMENT + " to " + TYPE_MAP);
-            if (elements.putIfAbsent(element.getLabel(), element) != null)
-                throw new InvalidElementException("Duplicate " + ELEMENT + " in " + TYPE_MAP + " " + label);
+            if (elements.putIfAbsent(element.getName(), element) != null)
+                throw new InvalidElementException("Duplicate " + ELEMENT + " in " + TYPE_MAP + " " + name);
             return this;
         }
 
@@ -32,7 +35,7 @@ public class MapElement extends Element {
             if (elements.isEmpty())
                 throw new InvalidElementException(TYPE_MAP + " requires at least one " + ELEMENT);
             else
-                return new MapElement(label, type, optional, elements);
+                return new MapElement(name, type, optional, elements);
         }
     }
 

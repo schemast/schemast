@@ -1,6 +1,6 @@
 package com.schemast;
 
-import com.schemast.schemas.SchemaParserRegistry;
+import com.schemast.parsers.SchemaParserRegistry;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,28 +20,24 @@ public class SchemaEngineTest {
         engine = new SchemaEngine(null);
     }
 
-    @Test(expected = UnknownSchemaTypeException.class)
+    @Test
     public void testParsingUnknownSchema() {
         SchemaParserRegistry reg = new SchemaParserRegistry();
         assertNull(reg.getParser(UNKNOWN_PARSER));
-
-        engine.parse(UNKNOWN_PARSER, "unknown data");
+        assertNull(engine.parse(UNKNOWN_PARSER, "unknown data"));
     }
 
     @Test
     public void testSchemaParserReturnsNullSchema() {
-        SchemaParserRegistry reg = new SchemaParserRegistry();
+        SchemaParserRegistry reg = new SchemaParserRegistry("test.plugins.nulling");
         assertNotNull(reg.getParser(NULL_PARSER));
-
-        engine.parse(NULL_PARSER, "huh?");
+        assertNull(engine.parse(NULL_PARSER, "huh?"));
     }
 
     @Test
     public void testValidMockSchema() {
-        SchemaParserRegistry reg = new SchemaParserRegistry();
+        SchemaParserRegistry reg = new SchemaParserRegistry("test.plugins.mock");
         assertNotNull(reg.getParser(MOCK_PARSER));
-
-        assertNotNull(engine.parse(MOCK_PARSER, "huh?"));
+        assertNull(engine.parse(MOCK_PARSER, "huh?"));
     }
-
 }

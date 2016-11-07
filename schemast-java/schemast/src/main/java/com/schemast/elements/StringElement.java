@@ -1,6 +1,10 @@
 package com.schemast.elements;
 
+import com.schemast.util.NullableDefault;
+
 import java.util.Optional;
+
+import static com.schemast.Constants.TYPE_STRING;
 
 public class StringElement extends Element {
 	public static final String NULLABLE = "nullable";
@@ -10,12 +14,12 @@ public class StringElement extends Element {
 
     static class Builder extends ElementBuilder {
 	    private boolean nullable = false;
-        private NullableDefault<String> def = new NullableDefault<String>();
+        private NullableDefault<String> def = new NullableDefault<>();
         private Long minLength;
         private Long maxLength;
 
         public Builder(String label) {
-            super(label, Element.TYPE_STRING);
+            super(label, TYPE_STRING);
         }
         
         @Override
@@ -75,7 +79,7 @@ public class StringElement extends Element {
             if (minLength != null && maxLength != null && minLength > maxLength)
                 throw new InvalidElementException(MIN_LENGTH + " cannot be greater than " + MAX_LENGTH);
 
-            return new StringElement(label, type, optional, nullable, def, minLength, maxLength);
+            return new StringElement(name, type, optional, nullable, def, minLength, maxLength);
         }
     }
 

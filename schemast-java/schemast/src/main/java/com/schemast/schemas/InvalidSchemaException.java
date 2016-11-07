@@ -1,9 +1,10 @@
 package com.schemast.schemas;
 
-public class InvalidSchemaException extends SchemaException {
+import com.schemast.SchemastException;
+
+public class InvalidSchemaException extends SchemastException {
 
     public InvalidSchemaException(String msg) {
         super(msg);
     }
-
 }

@@ -60,5 +60,4 @@ public class SchemaParserRegistry {
         else
             return parsers.get(type);
     }
-
 }

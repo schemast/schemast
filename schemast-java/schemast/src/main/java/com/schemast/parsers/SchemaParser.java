@@ -7,5 +7,4 @@ public interface SchemaParser {
     Schema parse(String schema);
 
     String getType();
-
 }

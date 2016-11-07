@@ -9,18 +9,18 @@ public class MapElementBuilderTest extends ElementTestBase {
 
     @Override
     protected void setType() {
-        b = new Element.Builder().ofMap(LABEL).add(mockElement());
+        b = new Element.Builder().ofMap(NAME).add(mockElement());
         super.b = b;
     }
 
     @Test(expected = InvalidElementException.class)
     public void testEmptyMap() {
-	    new Element.Builder().ofMap(LABEL).build();
+	    new Element.Builder().ofMap(NAME).build();
     }
 
 	@Test
 	public void testAddElements() {
-		MapElement m = b.add(mockElement(LABEL2)).build();
+		MapElement m = b.add(mockElement(NAME2)).build();
 		assertEquals(2, m.getElements().size());
 	}
 

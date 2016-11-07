@@ -41,7 +41,7 @@ public class InMemorySchemaRepository implements SchemaRepository {
         if (s == null) throw new SchemaRepositoryException("Schema cannot be null");
 
         Map<Integer, Schema> vMap = getVersionMap(s.getNamespace(), s.getName());
-        vMap.put(s.getVersion(), s);
+        vMap.put(s.getMetadata().getVersion(), s);
     }
 
     @Override

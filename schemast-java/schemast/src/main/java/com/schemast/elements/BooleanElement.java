@@ -2,6 +2,8 @@ package com.schemast.elements;
 
 import java.util.Optional;
 
+import static com.schemast.Constants.TYPE_BOOLEAN;
+
 public class BooleanElement extends Element {
 	public static final String DEFAULT = "default";
 
@@ -26,7 +28,7 @@ public class BooleanElement extends Element {
 
         @Override
         public BooleanElement build() {
-            return new BooleanElement(label, type, optional, def);
+            return new BooleanElement(name, type, optional, def);
         }
 
     }

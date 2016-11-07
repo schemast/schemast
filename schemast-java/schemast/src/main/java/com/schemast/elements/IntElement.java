@@ -2,6 +2,8 @@ package com.schemast.elements;
 
 import java.util.Optional;
 
+import static com.schemast.Constants.TYPE_INTEGER;
+
 public class IntElement extends Element {
     public static final String DEFAULT = "default";
     public static final String MIN_VALUE = "minValue";
@@ -59,7 +61,7 @@ public class IntElement extends Element {
             if (minValue != null && maxValue != null && minValue > maxValue)
                 throw new InvalidElementException(MIN_VALUE + " cannot be greater than " + MAX_VALUE);
 
-            return new IntElement(label, type, optional, def, minValue, maxValue);
+            return new IntElement(name, type, optional, def, minValue, maxValue);
         }
     }
 

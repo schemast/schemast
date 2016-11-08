@@ -4,29 +4,29 @@ import org.reflections.Reflections;
 
 import java.util.*;
 
-public class SchemaParserRegistry {
+public class ModelParserRegistry {
     private final String NATIVE_REGISTRY = "com.schemast.plugins";
-    private Map<String, SchemaParser> parsers = new HashMap<>();
+    private Map<String, ModelParser> parsers = new HashMap<>();
 
-    public SchemaParserRegistry() {
+    public ModelParserRegistry() {
         this(new HashSet<>());
     }
 
-    public SchemaParserRegistry(String basePackage) {
+    public ModelParserRegistry(String basePackage) {
         this(Collections.singletonList(basePackage));
     }
 
-    public SchemaParserRegistry(String[] basePackages) {
+    public ModelParserRegistry(String[] basePackages) {
         this(Arrays.asList(basePackages));
     }
 
-    public SchemaParserRegistry(Collection<String> basePackages) {
+    public ModelParserRegistry(Collection<String> basePackages) {
         basePackages.forEach(this::reflectPackage);
         addPackage(NATIVE_REGISTRY);
     }
 
-    public SchemaParserRegistry addPackage(String pack) {
-        if (pack == null || pack.isEmpty()) throw new SchemaParserException("Cannot add a null or empty package");
+    public ModelParserRegistry addPackage(String pack) {
+        if (pack == null || pack.isEmpty()) throw new ModelParserException("Cannot add a null or empty package");
         reflectPackage(pack);
         return this;
     }
@@ -40,23 +40,23 @@ public class SchemaParserRegistry {
     private void addToRegistry(Class<?> c) {
         try {
             Object o = c.newInstance();
-            SchemaParser sp = (SchemaParser) o;
+            ModelParser sp = (ModelParser) o;
             String type = sp.getType();
 
             if (type == null || type.isEmpty()) {
-                throw new SchemaParserException(SchemastParser.class + " type must be a valid ofString");
+                throw new ModelParserException(SchemastParser.class + " type must be a valid ofString");
             } else if (parsers.putIfAbsent(type, sp) != null) {
-                throw new SchemaParserException(
+                throw new ModelParserException(
                         "Duplicate " + SchemastParser.class + " for type " + type + " found on the classpath");
             }
         } catch (Exception e) {
-            throw new SchemaParserException(e);
+            throw new ModelParserException(e);
         }
     }
 
-    public SchemaParser getParser(String type) {
+    public ModelParser getParser(String type) {
         if (type == null || type.isEmpty())
-            throw new SchemaParserException("Parser type must be a valid ofString");
+            throw new ModelParserException("Parser type must be a valid ofString");
         else
             return parsers.get(type);
     }

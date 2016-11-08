@@ -8,7 +8,7 @@ import java.util.Arrays;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class SchemaParserRegistryTest {
+public class ModelParserRegistryTest {
     private final String BASE = "test.plugins.";
 
     // safe packages
@@ -28,14 +28,14 @@ public class SchemaParserRegistryTest {
     private final String TYPE_NULLING = "nulling";
 
     // auto-scanned types
-    private final String TEST_1 = "TestSchemaParser1";
-    private final String TEST_2 = "TestSchemaParser2";
+    private final String TEST_1 = "TestModelParser1";
+    private final String TEST_2 = "TestModelParser2";
 
-    private SchemaParserRegistry registry;
+    private ModelParserRegistry registry;
 
     @Test
     public void testBasePackagesAreScanned() {
-        registry = new SchemaParserRegistry();
+        registry = new ModelParserRegistry();
         assertNotNull(registry.getParser(TEST_1));
         assertNotNull(registry.getParser(TEST_2));
         assertNull(registry.getParser(TYPE_BAD));
@@ -43,24 +43,24 @@ public class SchemaParserRegistryTest {
 
     @Test
     public void testBadPackageReturnsNull() {
-        registry = new SchemaParserRegistry();
+        registry = new ModelParserRegistry();
         assertNull(registry.getParser(TYPE_BAD));
     }
 
-    @Test(expected = SchemaParserException.class)
+    @Test(expected = ModelParserException.class)
     public void testNull() {
-        registry = new SchemaParserRegistry();
+        registry = new ModelParserRegistry();
         registry.getParser(null);
     }
 
     @Test
     public void testAllConstructorsWithEmptyExtraPackages() {
-        registry = new SchemaParserRegistry(new String[]{});
+        registry = new ModelParserRegistry(new String[]{});
         assertNotNull(registry.getParser(TEST_1));
         assertNotNull(registry.getParser(TEST_2));
         assertNull(registry.getParser(TYPE_BAD));
 
-        registry = new SchemaParserRegistry(new ArrayList<>());
+        registry = new ModelParserRegistry(new ArrayList<>());
         assertNotNull(registry.getParser(TEST_1));
         assertNotNull(registry.getParser(TEST_2));
         assertNull(registry.getParser(TYPE_BAD));
@@ -70,12 +70,12 @@ public class SchemaParserRegistryTest {
     public void testAllConstructorsWithExtraPackages() {
         String[] packages = new String[]{ MOCK_PACKAGE, NULLING_PACKAGE };
 
-        registry = new SchemaParserRegistry(packages);
+        registry = new ModelParserRegistry(packages);
         assertNotNull(registry.getParser(TYPE_MOCK));
         assertNotNull(registry.getParser(TYPE_NULLING));
         assertNull(registry.getParser(TYPE_BAD));
 
-        registry = new SchemaParserRegistry(Arrays.asList(packages));
+        registry = new ModelParserRegistry(Arrays.asList(packages));
         assertNotNull(registry.getParser(TYPE_MOCK));
         assertNotNull(registry.getParser(TYPE_NULLING));
         assertNull(registry.getParser(TYPE_BAD));
@@ -85,12 +85,12 @@ public class SchemaParserRegistryTest {
     public void testAllConstructorsWithExtraPackagesAndBadPackage() {
         String[] packages = new String[]{ MOCK_PACKAGE, NULLING_PACKAGE, BAD_PACKAGE };
 
-        registry = new SchemaParserRegistry(packages);
+        registry = new ModelParserRegistry(packages);
         assertNotNull(registry.getParser(TYPE_MOCK));
         assertNotNull(registry.getParser(TYPE_NULLING));
         assertNull(registry.getParser(TYPE_BAD));
 
-        registry = new SchemaParserRegistry(Arrays.asList(packages));
+        registry = new ModelParserRegistry(Arrays.asList(packages));
         assertNotNull(registry.getParser(TYPE_MOCK));
         assertNotNull(registry.getParser(TYPE_NULLING));
         assertNull(registry.getParser(TYPE_BAD));
@@ -98,7 +98,7 @@ public class SchemaParserRegistryTest {
 
     @Test
     public void testAddPackage() {
-        registry = new SchemaParserRegistry().addPackage(MOCK_PACKAGE).addPackage(NULLING_PACKAGE);
+        registry = new ModelParserRegistry().addPackage(MOCK_PACKAGE).addPackage(NULLING_PACKAGE);
         assertNotNull(registry.getParser(TYPE_MOCK));
         assertNotNull(registry.getParser(TYPE_NULLING));
         assertNull(registry.getParser(TYPE_BAD));
@@ -106,44 +106,44 @@ public class SchemaParserRegistryTest {
 
     @Test
     public void testAddPackageWithBadPackage() {
-        registry = new SchemaParserRegistry().addPackage(MOCK_PACKAGE).addPackage(BAD_PACKAGE);
+        registry = new ModelParserRegistry().addPackage(MOCK_PACKAGE).addPackage(BAD_PACKAGE);
         assertNotNull(registry.getParser(TYPE_MOCK));
         assertNull(registry.getParser(TYPE_BAD));
     }
 
-    @Test(expected = SchemaParserException.class)
+    @Test(expected = ModelParserException.class)
     public void testAddPackageWithNull() {
-        registry = new SchemaParserRegistry().addPackage(null);
+        registry = new ModelParserRegistry().addPackage(null);
     }
 
-    @Test(expected = SchemaParserException.class)
+    @Test(expected = ModelParserException.class)
     public void testAddPackageWithEmptyPackage() {
-        registry = new SchemaParserRegistry().addPackage("");
+        registry = new ModelParserRegistry().addPackage("");
     }
 
-    @Test(expected = SchemaParserException.class)
+    @Test(expected = ModelParserException.class)
     public void testEmptyTypeAnnotation() {
-        registry = new SchemaParserRegistry(INVALID_PACKAGE);
+        registry = new ModelParserRegistry(INVALID_PACKAGE);
     }
 
-    @Test(expected = SchemaParserException.class)
+    @Test(expected = ModelParserException.class)
     public void testClassIncorrectlyAnnotatedAsAParser() {
-        registry = new SchemaParserRegistry(NOT_A_PARSER_PACKAGE);
+        registry = new ModelParserRegistry(NOT_A_PARSER_PACKAGE);
     }
 
-    @Test(expected = SchemaParserException.class)
+    @Test(expected = ModelParserException.class)
     public void testDuplicateParsers() {
-        registry = new SchemaParserRegistry(DUPLICATE_PACKAGE);
+        registry = new ModelParserRegistry(DUPLICATE_PACKAGE);
     }
 
-    @Test(expected = SchemaParserException.class)
+    @Test(expected = ModelParserException.class)
     public void testDuplicateParsersInDifferentPackages() {
-        registry = new SchemaParserRegistry(new String[]{NULLING_PACKAGE, NULLING_DIFFERENT_PACKAGE});
+        registry = new ModelParserRegistry(new String[]{NULLING_PACKAGE, NULLING_DIFFERENT_PACKAGE});
     }
 
-    @Test(expected = SchemaParserException.class)
+    @Test(expected = ModelParserException.class)
     public void testDuplicateParsersAddedSeparately() {
-        registry = new SchemaParserRegistry(NULLING_PACKAGE).addPackage(NULLING_DIFFERENT_PACKAGE);
+        registry = new ModelParserRegistry(NULLING_PACKAGE).addPackage(NULLING_DIFFERENT_PACKAGE);
     }
 
 }

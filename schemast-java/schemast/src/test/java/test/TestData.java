@@ -6,94 +6,94 @@ import com.schemast.schemas.Metadata;
 import com.schemast.schemas.Schema;
 
 public class TestData {
-    protected static final String NAMESPACE = "myNamespace";
-    protected static final String NAMESPACE2 = "myNamespace2";
-    protected static final String NAME = "mySchema";
-    protected static final String NAME2 = "mySchema2";
-    protected static final int VERSION = 4;
-    protected static final int VERSION2 = 5;
-    protected static final String FIELD_NAME = "myField";
-    protected static final String FIELD_NAME2 = "myField2";
+    public static final String NAMESPACE = "myNamespace";
+    public static final String NAMESPACE2 = "myNamespace2";
+    public static final String NAME = "mySchema";
+    public static final String NAME2 = "mySchema2";
+    public static final int VERSION = 4;
+    public static final int VERSION2 = 5;
+    public static final String FIELD_NAME = "myField";
+    public static final String FIELD_NAME2 = "myField2";
 
-    protected Header testHeader() {
+    public Header testHeader() {
         return testHeader(NAMESPACE);
     }
 
-    protected Header testHeader(String namespace) {
+    public Header testHeader(String namespace) {
         return new Header(namespace);
     }
 
-    protected Metadata testMetadata() {
+    public Metadata testMetadata() {
         return testMetadata(NAME,VERSION);
     }
 
-    protected Metadata testMetadata(String name, int version) {
+    public Metadata testMetadata(String name, int version) {
         return new Metadata.Builder().name(name).version(version).build();
     }
 
-    protected Schema testSchema() {
+    public Schema testSchema() {
         return testSchema(NAMESPACE, NAME, VERSION);
     }
 
-    protected Schema testSchema(String namespace, String name, int version) {
+    public Schema testSchema(String namespace, String name, int version) {
         return new Schema.Builder(namespace).metadata(testMetadata(name, version)).append(mockElement()).build();
     }
 
-    protected Element mockElement() {
+    public Element mockElement() {
         return mockElement(FIELD_NAME);
     }
 
-    protected Element mockElement(String name) {
+    public Element mockElement(String name) {
         return new MockElement(name);
     }
 
-//    protected final List<Element> allFields = null; //TODO: buildAllFields();
+//    public final List<Element> allFields = null; //TODO: buildAllFields();
 //
-//    protected Element booleanField() {
+//    public Element booleanField() {
 //        return booleanField(FIELD);
 //    }
 //
-//    protected Element booleanField(String label) {
+//    public Element booleanField(String label) {
 //        return booleanFieldBuilder(label).build();
 //    }
 //
-//    protected BooleanElement.Builder booleanFieldBuilder(String label) {
+//    public BooleanElement.Builder booleanFieldBuilder(String label) {
 //        return new BooleanElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
 //    }
 //
-//    protected Element decimalField() {
+//    public Element decimalField() {
 //        return decimalField(FIELD);
 //    }
 //
-//    protected Element decimalField(String label) {
+//    public Element decimalField(String label) {
 //        return decimalFieldBuilder(label).build();
 //    }
 //
-//    protected DecimalFieldElement.Builder decimalFieldBuilder(String label) {
+//    public DecimalFieldElement.Builder decimalFieldBuilder(String label) {
 //        return new DecimalFieldElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
 //    }
 //
-//    protected Element intField() {
+//    public Element intField() {
 //        return intField(FIELD);
 //    }
 //
-//    protected Element intField(String label) {
+//    public Element intField(String label) {
 //        return intFieldBuilder(label).build();
 //    }
 //
-//    protected IntElement.Builder intFieldBuilder(String label) {
+//    public IntElement.Builder intFieldBuilder(String label) {
 //        return new IntElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
 //    }
 //
-//    protected Element stringField() {
+//    public Element stringField() {
 //        return stringField(FIELD);
 //    }
 //
-//    protected Element stringField(String label) {
+//    public Element stringField(String label) {
 //        return stringFieldBuilder(label).build();
 //    }
 //
-//    protected StringElement.Builder stringFieldBuilder(String label) {
+//    public StringElement.Builder stringFieldBuilder(String label) {
 //        return new StringElement.Builder(label).nullable(true).required(false).stored(FieldElement.Store.YES).search(FieldElement.Search.NO);
 //    }
 //

@@ -1,6 +1,6 @@
 package com.schemast;
 
-public abstract class SchemastException extends RuntimeException {
+public class SchemastException extends RuntimeException {
 
     public SchemastException(String msg) {
         super(msg);

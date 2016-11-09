@@ -21,6 +21,10 @@ public abstract class Element extends Named {
         public StringElement.Builder ofString(String name) {
             return new StringElement.Builder(name);
         }
+
+	    public EnumElement.Builder ofEnum(String name) {
+		    return new EnumElement.Builder(name);
+	    }
     }
 
     private String type;

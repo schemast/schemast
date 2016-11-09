@@ -5,12 +5,12 @@ import com.schemast.util.NullableDefault;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.schemast.Constants.TYPE_BOOLEAN;
 import static com.schemast.Constants.TYPE_ENUM;
 
 public class EnumElement extends Element {
 	public static final String NULLABLE = "nullable";
 	public static final String DEFAULT = "default";
+	public static final String VALUES = "values";
 
 	public static class Builder extends ElementBuilder {
 	    private boolean nullable = false;
@@ -18,7 +18,7 @@ public class EnumElement extends Element {
 	    private Set<String> values = new HashSet<>();
 
         public Builder(String name) {
-            super(name, TYPE_BOOLEAN);
+            super(name, TYPE_ENUM);
         }
 
         @Override

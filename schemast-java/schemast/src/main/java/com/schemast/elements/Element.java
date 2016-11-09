@@ -6,6 +6,10 @@ public abstract class Element extends Named {
 
     public static class Builder {
 
+	    public ArrayElement.Builder ofArray(String name) {
+		    return new ArrayElement.Builder(name);
+	    }
+
         public BooleanElement.Builder ofBoolean(String name) {
             return new BooleanElement.Builder(name);
         }

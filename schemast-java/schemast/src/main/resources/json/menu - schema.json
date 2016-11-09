@@ -62,14 +62,8 @@
             "elements": {
               "style": {
                 "type": "array",
-                "values": [
-                  "bold",
-                  "italic",
-                  "normal"
-                ],
-                "default": [
-                  "normal"
-                ]
+                "maxSize": 3,
+                "optional": true
               },
               "hOffset": {
                 "type": "int",

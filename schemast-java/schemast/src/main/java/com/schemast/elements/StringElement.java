@@ -106,10 +106,10 @@ public class StringElement extends Element {
     }
 
     public Optional<Long> getMinLength() {
-        return Optional.of(minLength);
+        return Optional.ofNullable(minLength);
     }
 
 	public Optional<Long> getMaxLength() {
-		return Optional.of(maxLength);
+		return Optional.ofNullable(maxLength);
     }
 }

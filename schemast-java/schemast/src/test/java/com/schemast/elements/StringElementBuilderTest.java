@@ -43,6 +43,12 @@ public class StringElementBuilderTest extends ElementTestBase {
 		assertEquals(min, be.getMinLength().get());
 	}
 
+	@Test
+	public void testMinLengthNotSet() {
+		StringElement be = b.build();
+		assertFalse(be.getMinLength().isPresent());
+	}
+
 	@Test(expected = InvalidElementException.class)
 	public void testNegativeMinLength() {
 		b.minLength(-5L).build();
@@ -67,6 +73,12 @@ public class StringElementBuilderTest extends ElementTestBase {
 		StringElement be = b.maxLength(max).build();
 		assertTrue(be.getMaxLength().isPresent());
 		assertEquals(max, be.getMaxLength().get());
+	}
+
+	@Test
+	public void testMaxLengthNotSet() {
+		StringElement be = b.build();
+		assertFalse(be.getMaxLength().isPresent());
 	}
 
 	@Test(expected = InvalidElementException.class)

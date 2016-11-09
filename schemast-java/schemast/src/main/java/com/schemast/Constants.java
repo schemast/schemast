@@ -3,12 +3,12 @@ package com.schemast;
 public class Constants {
 	public static final String MODEL = "model";
 	public static final String HEADER = "header";
+	public static final String SCHEMA = "schema";
 	public static final String SCHEMAS = "schemas";
 	public static final String NAMESPACE = "namespace";
-	public static final String NAME = "name";
 
+	public static final String NAME = "name";
 	public static final String METADATA = "metadata";
-	public static final String SCHEMA_NAME = "schemaName";
 	public static final String VERSION = "version";
 	public static final int MIN_VERSION = 1;
 	public static final String STRUCTURE = "structure";

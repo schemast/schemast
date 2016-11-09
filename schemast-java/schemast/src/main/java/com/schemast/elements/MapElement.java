@@ -12,8 +12,8 @@ public class MapElement extends Element {
     static class Builder extends ElementBuilder {
         private Map<String, Element> elements = new HashMap<>();
 
-        Builder(String label) {
-            super(label, TYPE_MAP);
+        Builder(String name) {
+            super(name, TYPE_MAP);
         }
 
         @Override
@@ -41,8 +41,8 @@ public class MapElement extends Element {
 
     private Map<String, Element> elements;
 
-    private MapElement(String label, String type, boolean optional, Map<String, Element> elements) {
-        super(label, type, optional);
+    private MapElement(String name, String type, boolean optional, Map<String, Element> elements) {
+        super(name, type, optional);
         this.elements = elements;
     }
 

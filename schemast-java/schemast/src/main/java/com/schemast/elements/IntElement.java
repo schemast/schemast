@@ -14,8 +14,8 @@ public class IntElement extends Element {
         private Integer minValue;
         private Integer maxValue;
 
-        Builder(String label) {
-            super(label, TYPE_INTEGER);
+        Builder(String name) {
+            super(name, TYPE_INTEGER);
         }
         
         @Override
@@ -69,8 +69,8 @@ public class IntElement extends Element {
     private Integer min;
     private Integer max;
 
-    private IntElement(String label, String type, boolean required, Integer def, Integer min, Integer max) {
-        super(label, type, required);
+    private IntElement(String name, String type, boolean required, Integer def, Integer min, Integer max) {
+        super(name, type, required);
         this.def = def;
         this.min = min;
         this.max = max;

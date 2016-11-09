@@ -10,8 +10,8 @@ public class BooleanElement extends Element {
     public static class Builder extends ElementBuilder {
         private Boolean def;
 
-        public Builder(String label) {
-            super(label, TYPE_BOOLEAN);
+        public Builder(String name) {
+            super(name, TYPE_BOOLEAN);
         }
 
         @Override
@@ -35,8 +35,8 @@ public class BooleanElement extends Element {
 
     private Boolean def;
 
-    private BooleanElement(String label, String type, boolean optional, Boolean def) {
-        super(label, type, optional);
+    private BooleanElement(String name, String type, boolean optional, Boolean def) {
+        super(name, type, optional);
         this.def = def;
     }
 

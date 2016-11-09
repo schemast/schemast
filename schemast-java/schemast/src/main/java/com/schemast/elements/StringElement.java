@@ -18,8 +18,8 @@ public class StringElement extends Element {
         private Long minLength;
         private Long maxLength;
 
-        public Builder(String label) {
-            super(label, TYPE_STRING);
+        public Builder(String name) {
+            super(name, TYPE_STRING);
         }
         
         @Override
@@ -88,9 +88,9 @@ public class StringElement extends Element {
 	private Long minLength;
 	private Long maxLength;
 
-    private StringElement(String label, String type, boolean optional, boolean nullable,
+    private StringElement(String name, String type, boolean optional, boolean nullable,
                           NullableDefault<String> def, Long minLength, Long maxLength) {
-        super(label, type, optional);
+        super(name, type, optional);
 	    this.nullable = nullable;
         this.def = def;
         this.minLength = minLength;
